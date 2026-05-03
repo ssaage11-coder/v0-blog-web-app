@@ -24,6 +24,16 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
+## Deploying to GitHub Pages
+
+This project is configured to deploy a static Next.js export from the `deploy` branch with GitHub Actions.
+
+1. In the GitHub repository settings, set **Pages > Build and deployment > Source** to **GitHub Actions**.
+2. Push commits to the `deploy` branch.
+3. The `Deploy GitHub Pages` workflow builds the site with `npm ci` and `npm run build`, uploads `out/`, and publishes it to GitHub Pages.
+
+For the default project page URL, the app is built under `/v0-blog-web-app`. If you later use a custom domain, set the workflow environment variable `PAGES_BASE_PATH` to an empty value.
+
 ## Learn More
 
 To learn more, take a look at the following resources:

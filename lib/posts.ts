@@ -7,6 +7,15 @@ import remarkGfm from "remark-gfm"
 import remarkHtml from "remark-html"
 
 const postsDirectory = path.join(process.cwd(), "content/posts")
+const repositoryName = process.env.GITHUB_REPOSITORY?.split("/")[1] ?? "v0-blog-web-app"
+const basePath =
+  process.env.PAGES_BASE_PATH ?? (process.env.GITHUB_ACTIONS === "true" ? `/${repositoryName}` : "")
+
+function addBasePathToInternalLinks(html: string): string {
+  if (!basePath) return html
+
+  return html.replaceAll('href="/', `href="${basePath}/`)
+}
 
 export interface PostFrontmatter {
   title: string
@@ -100,7 +109,7 @@ export async function getPostBySlug(slug: string): Promise<PostWithHtml | null> 
 
   // Process markdown to HTML
   const processedContent = await remark().use(remarkGfm).use(remarkHtml).process(content)
-  const htmlContent = processedContent.toString()
+  const htmlContent = addBasePathToInternalLinks(processedContent.toString())
 
   return {
     slug,
