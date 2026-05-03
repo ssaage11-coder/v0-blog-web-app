@@ -6,7 +6,9 @@ import { remark } from "remark"
 import remarkGfm from "remark-gfm"
 import remarkHtml from "remark-html"
 
-const postsDirectory = path.join(process.cwd(), "content/posts")
+function getPostsDirectory(): string {
+  return path.join(process.cwd(), "content", "posts")
+}
 
 export interface PostFrontmatter {
   title: string
@@ -49,6 +51,8 @@ function extractExcerpt(content: string, description?: string): string {
 }
 
 export async function getAllPosts(): Promise<Post[]> {
+  const postsDirectory = getPostsDirectory()
+
   if (!fs.existsSync(postsDirectory)) {
     return []
   }
@@ -81,6 +85,7 @@ export async function getAllPosts(): Promise<Post[]> {
 }
 
 export async function getPostBySlug(slug: string): Promise<PostWithHtml | null> {
+  const postsDirectory = getPostsDirectory()
   const mdPath = path.join(postsDirectory, `${slug}.md`)
   const mdxPath = path.join(postsDirectory, `${slug}.mdx`)
 

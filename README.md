@@ -24,6 +24,17 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
+## Vercel Deployment
+
+This project is configured for Vercel as a Next.js app.
+
+- Framework preset: `Next.js`
+- Build command: `pnpm run build`
+- Output directory: leave empty / use Vercel default
+- Environment variables: none required
+
+Generated build folders such as `out/`, `.next/`, and `node_modules/` are excluded from Vercel uploads.
+
 ## Learn More
 
 To learn more, take a look at the following resources:
